@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="plano_cd" id="Project-26f" database="SqlServer" >
+	<schema name="dbo" catalogname="plano_cd" >
+		<table name="tb_participante" prior="Tbl" spec="" >
+			<column name="co_seq_participante" type="int" jt="4" mandatory="y" >
+				<identity><![CDATA[IDENTITY]]></identity>
+			</column>
+			<column name="dt_created" type="datetime" jt="92" mandatory="y" >
+				<defo><![CDATA[sysdatetime()]]></defo>
+			</column>
+			<column name="co_pessoa_fisica" type="int" jt="4" mandatory="y" />
+			<index name="pk_tb_participante" unique="PRIMARY_KEY" >
+				<column name="co_seq_participante" />
+			</index>
+			<fk name="fk_tb_participante_tb_pessoa_fisica" to_schema="plano_cd.dbo" to_table="tb_pessoa_fisica" >
+				<fk_column name="co_pessoa_fisica" pk="co_seq_pessoa_fisica" />
+			</fk>
+		</table>
+		<table name="tb_patrocinadora" prior="Tbl" >
+			<column name="co_seq_patrocinadora" type="int" jt="4" mandatory="y" >
+				<identity><![CDATA[IDENTITY]]></identity>
+			</column>
+			<column name="dt_created" type="datetime" jt="92" mandatory="y" >
+				<defo><![CDATA[sysdatetime()]]></defo>
+			</column>
+			<column name="co_pessoa_juridica" type="int" jt="4" mandatory="y" />
+			<index name="pk_tb_patrocinadora" unique="PRIMARY_KEY" >
+				<column name="co_seq_patrocinadora" />
+			</index>
+			<fk name="fk_tb_patrocinadora_tb_pessoa_juridica" to_schema="plano_cd.dbo" to_table="tb_pessoa_juridica" >
+				<fk_column name="co_pessoa_juridica" pk="co_seq_pessoa_juridica" />
+			</fk>
+		</table>
+		<table name="tb_pessoa_fisica" >
+			<column name="co_seq_pessoa_fisica" type="int" jt="4" mandatory="y" >
+				<identity><![CDATA[IDENTITY]]></identity>
+			</column>
+			<column name="nm_pessoa_fisica" type="varchar" length="80" jt="12" />
+			<column name="dd_nascimento" type="date" jt="91" mandatory="y" />
+			<index name="pk_tb_pessoa_fisica" unique="PRIMARY_KEY" >
+				<column name="co_seq_pessoa_fisica" />
+			</index>
+		</table>
+		<table name="tb_pessoa_juridica" prior="Tbl" >
+			<column name="co_seq_pessoa_juridica" type="int" jt="4" mandatory="y" >
+				<identity><![CDATA[IDENTITY]]></identity>
+			</column>
+			<column name="nm_pessoa_juridica" type="varchar" length="80" jt="12" />
+			<column name="nm_cnpj" type="varchar" length="80" jt="12" mandatory="y" >
+				<comment><![CDATA[Somente numeros sem mascara.]]></comment>
+			</column>
+			<index name="pk_tb_pessoa_juridica" unique="PRIMARY_KEY" >
+				<column name="co_seq_pessoa_juridica" />
+			</index>
+		</table>
+	</schema>
+	<connector name="MyDb" database="MySql" host="localhost" port="3306" user="root" useSystemProxy="false" />
+	<connector name="SqlServer" database="SqlServer" driver_class="com.microsoft.sqlserver.jdbc.SQLServerDriver" driver_jar="mssql-jdbc-12.2.0.jre11.jar" driver_desc="SQL Server Authentication" host="LEONARDOMARTINS" port="1433" instance="plano-cd" user="leonardo" passwd="MjUwNTAz" useSystemProxy="false" />
+	<layout name="Default Layout" id="Layout-1756" show_relation="columns" >
+		<comment><![CDATA[plano_cd_20230503]]></comment>
+		<entity schema="plano_cd.dbo" name="tb_participante" color="C1D8EE" x="928" y="480" />
+		<entity schema="plano_cd.dbo" name="tb_patrocinadora" color="C1D8EE" x="912" y="304" />
+		<entity schema="plano_cd.dbo" name="tb_pessoa_fisica" color="C1D8EE" x="416" y="480" />
+		<entity schema="plano_cd.dbo" name="tb_pessoa_juridica" color="C1D8EE" x="400" y="288" />
+		<callout x="48" y="48" pointer="Round" >
+			<comment><![CDATA[This is a layout - a diagram with tools.
+- Create new entities by right-clicking the layout. 
+- Double-click entity headers to edit.
+- For a better understanding of the schema, create multiple layouts.
+- Deploy the model into the database by converting it first to the physical design.]]></comment>
+		</callout>
+	</layout>
+</project>
